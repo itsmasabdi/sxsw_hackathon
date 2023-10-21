@@ -1,15 +1,28 @@
 import secrets from 'secrets';
 
+let pageContent = null;
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.type === 'PAGE_CONTENT') {
+    console.log('Received page content:', request);
+    pageContent = request.pageContent;
+  }
+  // ... your existing code ...
+});
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === 'CALL_OPENAI') {
     console.log('request', request);
-    // sendResponse('hi');
-    callOpenAI(request.messages).then(sendResponse);
+    let system =
+      "You're an assistant helping with my query with bellow property\n\n" +
+      pageContent;
+    console.log('system', system);
+    callOpenAI(request.messages, system).then(sendResponse);
     return true; // Indicates that the response will be sent asynchronously.
   }
 });
 
-async function callOpenAI(messages) {
+async function callOpenAI(messages, system = 'Your a helpful assistant') {
   // console.log('callOpenAI', prompt);
 
   const OPENAI_ENDPOINT = 'https://api.openai.com/v1/chat/completions';
@@ -24,7 +37,7 @@ async function callOpenAI(messages) {
     messages: [
       {
         role: 'system',
-        content: 'Your a helpful assistant',
+        content: system,
       },
       ...messages,
     ],

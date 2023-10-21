@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ChatMessage from './ChatMessage';
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [textMessage, setTextMessage] = useState('');
+  const [system, setSystem] = useState('');
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     const pc = localStorage.getItem('pageContent');
+  //     console.log('Retrieved from local storage: ', pc);
+  //     setSystem(
+  //       "You're an assistant helping with my query with bellow property\n\n" +
+  //         pc
+  //     );
+  //   }, 2000);
+  // }, []);
 
   const submitChat = () => {
     const newMessages = [...messages, { role: 'user', content: textMessage }];
@@ -23,13 +35,10 @@ const Chat = () => {
     chrome.runtime.sendMessage(
       {
         type: 'GET_PAGE_CONTENT',
+        messages: 'get page content',
       },
       (response) => {
         console.log('Received response:', response);
-        setMessages([
-          ...newMessages,
-          { role: 'assistant', content: 'content.js ' + response },
-        ]);
       }
     );
 
