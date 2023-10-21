@@ -5,7 +5,8 @@ const properties = [
   {
     id: 1,
     url: 'https://www.realestate.com.au/property-apartment-nsw-randwick-143147708',
-    location: 'Randwick, NSW',
+    location: '2/40 Dutruc Street',
+    suburb: 'Randwick, NSW 2031',
     bedrooms: 2,
     bathrooms: 2,
     parking: 1,
@@ -19,7 +20,8 @@ const properties = [
   {
     id: 2,
     url: 'https://www.realestate.com.au/property-apartment-nsw-randwick-143267544',
-    location: 'Randwick, NSW',
+    location: '206/8 Yarraman Avenue',
+    suburb: 'Randwick, NSW 2031',
     bedrooms: 2,
     bathrooms: 2,
     parking: 1,
@@ -31,9 +33,24 @@ const properties = [
       'https://i2.au.reastatic.net/800x600-format=webp/a0a148e35b8c9a988665788cf33d02aea3fb59e1386746f861dfb40878193b8b/image.jpg',
   },
   {
+    id: 6,
+    url: 'https://www.domain.com.au/2-40-dutruc-street-randwick-nsw-2031-2018782771',
+    location: '2/40 Dutruc Street',
+    suburb: 'Randwick, NSW 2031',
+    bedrooms: 2,
+    bathrooms: 2,
+    parking: 1,
+    property_name: 'Property 6',
+    domain: 'domain',
+    domain_icon: 'https://s.domainstatic.com.au/domain/114.png',
+    image_url:
+      'https://rimh2.domainstatic.com.au/G8iM2BQ07tZ6TNIntn_MpUi-P9c=/fit-in/1920x1080/filters:format(jpeg):quality(80):no_upscale()/2018782771_1_1_230920_075012-w1478-h982',
+  },
+  {
     id: 3,
     url: 'https://www.realestate.com.au/property-apartment-nsw-randwick-143134856',
-    location: 'Randwick, NSW',
+    location: '2/40 Carrington Road',
+    suburb: 'Randwick, NSW 2031',
     bedrooms: 3,
     bathrooms: 2,
     parking: 2,
@@ -47,7 +64,8 @@ const properties = [
   {
     id: 4,
     url: 'https://www.domain.com.au/3-24-church-street-randwick-nsw-2031-2018839585',
-    location: 'Randwick, NSW',
+    location: '3/24 Church Street',
+    suburb: 'Randwick, NSW 2031',
     bedrooms: 2,
     bathrooms: 2,
     parking: 2,
@@ -56,6 +74,21 @@ const properties = [
     domain_icon: 'https://s.domainstatic.com.au/domain/114.png',
     image_url:
       'https://rimh2.domainstatic.com.au/jVGQegjkot7Yp7Tr0p33poXvSzU=/fit-in/1920x1080/filters:format(jpeg):quality(80):no_upscale()/2018839585_1_1_231017_053743-w4000-h2666',
+  },
+  {
+    id: 5,
+    url: 'https://www.realestate.com.au/property-townhouse-nsw-randwick-143253028',
+    location: '5/14E Dudley Street',
+    suburb: 'Randwick, NSW 2031',
+    bedrooms: 2,
+    bathrooms: 2,
+    parking: 1,
+    property_name: 'Property 5',
+    domain: 'realestate',
+    domain_icon:
+      'https://assets.reastatic.net/realestate.com.au/android-chrome-192x192.png',
+    image_url:
+      'https://i2.au.reastatic.net/800x600-format=webp/a0a148e35b8c9a988665788cf33d02aea3fb59e1386746f861dfb40878193b8b/image.jpg',
   },
 ];
 
@@ -80,12 +113,15 @@ const Favourite = () => {
                 <span className="ms-2">{property.domain}</span>
               </div>
 
-              <h5 className="text-lg font-semibold mt-2 text-left">
+              <h5 className="text-lg font-semibold mt-2 text-left ">
                 {property.location}
               </h5>
 
+              <h5 className="text-md font-semibold text-left ">
+                {property.suburb}
+              </h5>
               <div className="grid grid-cols-3 gap-x-4 text-left mt-3">
-                <div>
+                <div className="flex items-center space-x-2">
                   <div className="text-blue-500">
                     <svg
                       width="18"
@@ -114,7 +150,7 @@ const Favourite = () => {
                   <p className="text-sm mt-1">{property.bedrooms}</p>
                 </div>
 
-                <div>
+                <div className="flex items-center space-x-2">
                   <div className="text-blue-500">
                     <svg
                       width="18"
@@ -133,7 +169,7 @@ const Favourite = () => {
                   <p className="text-sm mt-1">{property.bathrooms}</p>
                 </div>
 
-                <div>
+                <div className="flex items-center space-x-2">
                   <div className="text-blue-500">
                     <svg
                       width="18"

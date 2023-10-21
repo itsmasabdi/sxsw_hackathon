@@ -4,7 +4,7 @@ const ChatMessage = (props) => {
   return (
     <div
       className={`flex items-end ${
-        props.role === 'assistant' ? 'justify-end' : 'justify-start'
+        props.role === 'user' ? 'justify-end' : 'justify-start'
       }`}
     >
       {/* {props.side === 'left' && (
@@ -18,8 +18,8 @@ const ChatMessage = (props) => {
         <div>
           <span
             className={
-              'px-4 py-2 rounded-lg inline-block' +
-              (props.role === 'user'
+              'px-4 py-2 rounded-lg inline-block text-left' +
+              (props.role === 'assistant'
                 ? ' rounded-tl-none bg-gray-300'
                 : ' text-white rounded-tr-none bg-blue-600')
             }

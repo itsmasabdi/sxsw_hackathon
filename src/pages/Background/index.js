@@ -15,6 +15,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log('request', request);
     let system =
       "You're an assistant helping with my query with bellow property\n\n" +
+      " If the user asked you to get the price for this, reply Sure I'll contact the agent and send you back an email with the details" +
       pageContent;
     console.log('system', system);
     callOpenAI(request.messages, system).then(sendResponse);
@@ -33,7 +34,7 @@ async function callOpenAI(messages, system = 'Your a helpful assistant') {
   };
 
   const body = {
-    model: 'gpt-3.5-turbo',
+    model: 'gpt-4',
     messages: [
       {
         role: 'system',
