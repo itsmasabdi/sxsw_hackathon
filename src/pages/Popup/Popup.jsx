@@ -19,16 +19,6 @@ const Popup = () => {
 
   const root = document.getElementById('root');
 
-  const onButtonClick = async () => {
-    console.log('calling openAI');
-    setNumber(number + 1);
-    chrome.runtime.sendMessage({
-      type: 'CALL_OPENAI',
-      prompt: 'hey',
-    });
-    console.log(root);
-  };
-
   return (
     <div className="App">
       <Chat />

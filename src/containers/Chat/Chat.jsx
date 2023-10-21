@@ -6,11 +6,32 @@ const Chat = () => {
   const [textMessage, setTextMessage] = useState('');
 
   const submitChat = () => {
-    setMessages([
-      ...messages,
-      { role: 'user', message: textMessage },
-      { role: 'assistance', message: 'OpenAI magic text comes here...' },
-    ]);
+    const newMessages = [...messages, { role: 'user', content: textMessage }];
+    setMessages(newMessages);
+
+    chrome.runtime.sendMessage(
+      {
+        type: 'CALL_OPENAI',
+        messages: newMessages,
+      },
+      (response) => {
+        console.log('Received response:', response);
+        setMessages([...newMessages, { role: 'assistant', content: response }]);
+      }
+    );
+
+    chrome.runtime.sendMessage(
+      {
+        type: 'GET_PAGE_CONTENT',
+      },
+      (response) => {
+        console.log('Received response:', response);
+        setMessages([
+          ...newMessages,
+          { role: 'assistant', content: 'content.js ' + response },
+        ]);
+      }
+    );
 
     setTextMessage('');
   };
@@ -29,11 +50,7 @@ const Chat = () => {
     <div className="flex flex-col h-full bg-gray-100">
       <div className="overflow-auto p-4 space-y-4">
         {messages.map((msg, i) => (
-          <ChatMessage
-            key={i}
-            message={msg.message}
-            side={msg.role === 'assistance' ? 'right' : 'left'}
-          />
+          <ChatMessage key={i} message={msg.content} role={msg.role} />
         ))}
       </div>
       <div className="border-t-2 border-gray-200 p-4 mb-2 fixed bottom-0 w-full left-0">

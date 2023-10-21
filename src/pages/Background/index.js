@@ -1,14 +1,16 @@
 import secrets from 'secrets';
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.type === 'CALL_OPENAI') {
-    callOpenAI(message.prompt).then(sendResponse);
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.type === 'CALL_OPENAI') {
+    console.log('request', request);
+    // sendResponse('hi');
+    callOpenAI(request.messages).then(sendResponse);
     return true; // Indicates that the response will be sent asynchronously.
   }
 });
 
-async function callOpenAI(prompt) {
-  console.log('callOpenAI', prompt);
+async function callOpenAI(messages) {
+  // console.log('callOpenAI', prompt);
 
   const OPENAI_ENDPOINT = 'https://api.openai.com/v1/chat/completions';
 
@@ -22,15 +24,11 @@ async function callOpenAI(prompt) {
     messages: [
       {
         role: 'system',
-        content:
-          'Your a helpful assistant that is completion my sentences for me.',
+        content: 'Your a helpful assistant',
       },
-      {
-        role: 'user',
-        content: prompt,
-      },
+      ...messages,
     ],
-    max_tokens: 50,
+    max_tokens: 256,
   };
 
   try {
