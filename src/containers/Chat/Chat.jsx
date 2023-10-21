@@ -4,18 +4,6 @@ import ChatMessage from './ChatMessage';
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [textMessage, setTextMessage] = useState('');
-  const [system, setSystem] = useState('');
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     const pc = localStorage.getItem('pageContent');
-  //     console.log('Retrieved from local storage: ', pc);
-  //     setSystem(
-  //       "You're an assistant helping with my query with bellow property\n\n" +
-  //         pc
-  //     );
-  //   }, 2000);
-  // }, []);
 
   const submitChat = () => {
     const newMessages = [...messages, { role: 'user', content: textMessage }];
