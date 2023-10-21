@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ChatMessage from './ChatMessage';
 import './Chat.css';
 
-const ChatWishlist = () => {
+const ChatFavourite = () => {
   const [messages, setMessages] = useState([]);
   const [textMessage, setTextMessage] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
@@ -49,7 +49,7 @@ const ChatWishlist = () => {
 
   return (
     <div className="h-full">
-      <div className="flex flex-col h-full bg-gray-100 chat-container">
+      <div className="h-full flex flex-col bg-gray-100 chat-container">
         <div className="overflow-auto p-4 space-y-4">
           {messages.map((msg, i) => (
             <ChatMessage key={i} message={msg.content} role={msg.role} />
@@ -118,4 +118,4 @@ const ChatWishlist = () => {
   );
 };
 
-export default ChatWishlist;
+export default ChatFavourite;
